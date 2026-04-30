@@ -1,76 +1,54 @@
 import { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
+const logo = '/yursaylogo.png'
 
 const navLinks = [
+  { name: 'About', href: '#about' },
+  { name: 'Features', href: '#features' },
   { name: 'How it works', href: '#how-it-works' },
-  { name: 'For consumers', href: '#consumers' },
-  { name: 'For vendors', href: '#vendors' },
-  { name: 'Trust Badge', href: '#trust-badge' },
+  { name: 'Why YurSay', href: '#why-yursay' },
 ];
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const location = useLocation();
 
   useEffect(() => {
-    const updateScrollState = () => {
-      setIsScrolled(window.scrollY > 8);
-    };
-
+    const updateScrollState = () => setIsScrolled(window.scrollY > 8);
     updateScrollState();
     window.addEventListener('scroll', updateScrollState, { passive: true });
-
     return () => window.removeEventListener('scroll', updateScrollState);
   }, []);
 
-  const isActive = (href) => {
-    if (href === '/') return location.pathname === '/';
-    if (href.startsWith('/')) return location.pathname === href;
-    return false;
-  };
-
-  const isRoute = (href) => href.startsWith('/');
-  const desktopNavLinkClass = isScrolled
-    ? 'text-primary hover:text-primary-dark'
-    : 'text-white hover:text-white';
-
   return (
-    <nav className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[93%] max-w-6xl">
-      <div className="flex items-center justify-between px-4 sm:px-5 py-3 bg-white/92 backdrop-blur-md border border-white/70 shadow-lg shadow-primary-dark/10 rounded-lg">
+    <nav className="fixed z-50 w-full bg-[#1E3D4E]/50 backdrop-blur-md">
+      <div className="mx-auto flex max-w-[1284px] items-center justify-between px-5 py-3 sm:px-8 lg:px-10">
+
         <Link to="/" className="flex items-center gap-2 text-primary-dark font-display font-extrabold text-xl">
-          <span className="grid h-8 w-8 place-items-center rounded-lg bg-primary text-white">Y</span>
-          <span>YurSay</span>
+         
+          <img src={logo} alt="YurSay" className="h-10 w-auto" />
+          
         </Link>
 
         <div className="hidden lg:flex items-center gap-1">
-          {navLinks.map((link) =>
-            isRoute(link.href) ? (
-              <Link
-                key={link.name}
-                to={link.href}
-                className={`px-3 py-1.5 text-sm font-medium transition-colors ${desktopNavLinkClass}`}
-              >
-                {link.name}
-              </Link>
-            ) : (
-              <a
-                key={link.name}
-                href={link.href}
-                className={`px-3 py-1.5 text-sm font-semibold transition-colors ${desktopNavLinkClass}`}
-              >
-                {link.name}
-              </a>
-            )
-          )}
+          {navLinks.map((link) => (
+            <a
+              key={link.name}
+              href={link.href}
+              className="px-3 py-1.5 text-sm font-semibold text-white hover:text-primary-dark transition-colors"
+            >
+              {link.name}
+            </a>
+          ))}
         </div>
 
-        <div className="hidden lg:flex items-center gap-3">
-          <Link to="/login" className="text-sm font-semibold text-white hover:text-white transition-colors">
-            Sign in
-          </Link>
-          <a href="#waitlist" className="px-5 py-2.5 text-sm font-bold bg-[#C1FF72] text-primary rounded-lg hover:bg-primary-dark transition-colors">
-            Join waitlist
+        <div className="hidden lg:block">
+          <a
+            href="#waitlist"
+            className="px-5 py-2.5 text-sm font-bold bg-[#C1FF72] text-primary-dark rounded-lg hover:bg-lime-300 transition-colors"
+          >
+            Join the Waitlist
           </a>
         </div>
 
@@ -95,35 +73,23 @@ const Navbar = () => {
       </div>
 
       {mobileOpen && (
-        <div className="lg:hidden mt-2 p-4 bg-white/97 backdrop-blur-md border border-line rounded-lg shadow-xl shadow-primary-dark/10 animate-slide-down">
-          {navLinks.map((link) =>
-            isRoute(link.href) ? (
-              <Link
-                key={link.name}
-                to={link.href}
-                className={`block py-2.5 text-sm font-medium ${
-                  isActive(link.href) ? 'text-primary' : 'text-ink-secondary hover:text-primary-dark'
-                }`}
-                onClick={() => setMobileOpen(false)}
-              >
-                {link.name}
-              </Link>
-            ) : (
-              <a
-                key={link.name}
-                href={link.href}
-                className="block py-2.5 text-sm font-semibold text-ink-secondary hover:text-primary-dark"
-                onClick={() => setMobileOpen(false)}
-              >
-                {link.name}
-              </a>
-            )
-          )}
-          <Link to="/login" className="mt-3 block w-full py-2.5 text-sm font-semibold text-primary border border-primary rounded-lg hover:bg-primary-50 transition-colors text-center" onClick={() => setMobileOpen(false)}>
-            Sign in
-          </Link>
-          <a href="#waitlist" className="mt-3 block w-full py-2.5 text-sm font-bold text-primary bg-[#C1FF72] rounded-lg hover:bg-primary-dark transition-colors text-center" onClick={() => setMobileOpen(false)}>
-            Join waitlist
+        <div className="mx-auto mt-2 max-w-[1284px] bg-white/97 p-4 shadow-xl shadow-black/10 animate-slide-down lg:hidden sm:px-8 lg:px-10">
+          {navLinks.map((link) => (
+            <a
+              key={link.name}
+              href={link.href}
+              className="block py-2.5 text-sm font-semibold text-ink-secondary hover:text-primary-dark"
+              onClick={() => setMobileOpen(false)}
+            >
+              {link.name}
+            </a>
+          ))}
+          <a
+            href="#waitlist"
+            className="mt-3 block w-full py-2.5 text-sm font-bold text-primary-dark bg-[#C1FF72] rounded-lg hover:bg-lime-300 transition-colors text-center"
+            onClick={() => setMobileOpen(false)}
+          >
+            Join the Waitlist
           </a>
         </div>
       )}
