@@ -561,10 +561,7 @@ const HomePage = () => {
           <div className="absolute -right-28 bottom-[-170px] h-[440px] w-[440px] rounded-full bg-[#2b6074]/72" />
 
           <div className="relative mx-auto max-w-[760px] text-center">
-            {/* <p className="mb-8 inline-flex h-8 items-center gap-2 rounded-full bg-white/13 px-4 text-[12px] font-extrabold uppercase tracking-[0.12em] text-[#B8FF65] font-['Montserrat']">
-              <span className="h-[7px] w-[7px] rounded-full bg-[#B8FF65]" />
-              Limited Early Access
-            </p> */}
+
               <p className="mb-5 inline-flex h-8 items-center gap-2 rounded-full bg-white/15 px-4 text-[12px] font-extrabold uppercase tracking-[0.12em] text-[#B8FF65] font-['Montserrat']">
                 <span className="h-[7px] w-[7px] rounded-full bg-[#B8FF65]" />
                  Limited Early Access
