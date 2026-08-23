@@ -6,14 +6,14 @@ const PublicOnlyRoute = ({ children }) => {
 
   if (authLoading) {
     return (
-      <div className="min-h-screen bg-navy-900 flex items-center justify-center text-white">
-        <div className="w-10 h-10 border-2 border-white/20 border-t-accent rounded-full animate-spin" />
+      <div className="flex min-h-screen items-center justify-center bg-white">
+        <div className="h-10 w-10 animate-spin rounded-full border-2 border-[#dde8ef] border-t-[#1e3d4e]" />
       </div>
     );
   }
 
   if (isAuthenticated) {
-    return <Navigate to="/dashboard" replace />;
+    return <Navigate to="/" replace />;
   }
 
   return children;
